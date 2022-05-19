@@ -1,0 +1,53 @@
+syntax="proto3";
+
+package proto;
+
+option go_package="genproto/user_service";
+
+service UserManagement {
+    rpc CreateNewUser (NewUser) returns (User) {}
+    rpc GetUsers (GetUsersParams) returns (UserList) {};
+    rpc GetById (UserRequest) returns (UserRequestResponse) {};
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {};
+    rpc DeleteUser (UserRequest) returns (UserResponse) {};
+} 
+
+message NewUser {
+    string name = 1;
+    int64 age = 2;
+}
+
+message User {
+    string name = 1;
+    int64 age = 2;
+    int64 id = 3;
+}
+
+message GetUsersParams {
+
+}
+
+message UserList {
+    repeated User users = 1;
+}
+
+message UserRequest{
+    int64 id = 1;
+}
+
+message UserResponse {
+    bool success = 1;
+}
+
+message UpdateUserRequest {
+    int64 id = 1;
+    User user = 2;
+}
+
+message UpdateUserResponse {
+    bool success = 1;
+}
+
+message UserRequestResponse {
+    User user = 1;
+}

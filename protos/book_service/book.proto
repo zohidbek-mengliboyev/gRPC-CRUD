@@ -1,0 +1,63 @@
+syntax="proto3";
+
+package proto;
+
+option go_package="genproto/book_service";
+
+service BookManagement {
+    rpc Create (NewBook) returns (Book) {};
+    rpc GetAll (BookParams) returns (BookList) {};
+    rpc Get (BookRequest) returns (BookResponse) {};
+    rpc Update (UpdateBookRequest) returns (UpdateBookResponse) {};
+    rpc Delete (BookRequest) returns (UpdateBookResponse) {};
+    rpc GetUserBooks (UserBookRequest) returns (UserBook) {};
+}
+
+message UserBook {
+    string name = 1;
+    int64 age = 2;
+    int64 id = 3;
+    repeated Book book = 4;
+}
+
+message UserBookRequest {
+    int64 user_id = 1;
+}
+
+message NewBook {
+    string book_name = 1;
+    string author = 2;
+    int64 user_id = 3;
+}
+
+message Book {
+    int64 book_id = 1;
+    string book_name = 2;
+    string author = 3;
+    int64 user_id = 4;
+}
+
+message BookParams {
+
+}
+
+message BookList {
+    repeated Book books = 1;
+}
+
+message BookRequest {
+    int64 book_id = 1;
+}
+
+message BookResponse {
+    Book book = 1;
+}
+
+message UpdateBookRequest {
+    int64 book_id = 1;
+    Book book = 2;
+}
+
+message UpdateBookResponse {
+    bool success = 1;
+}
